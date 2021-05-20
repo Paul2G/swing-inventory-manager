@@ -51,13 +51,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -77,7 +79,8 @@
       <option name="presentableId" value="Default" />
       <updated>1620943840571</updated>
       <workItem from="1620943841801" duration="126000" />
-      <workItem from="1620944088702" duration="502000" />
+      <workItem from="1620944088702" duration="558000" />
+      <workItem from="1621465433821" duration="14784000" />
     </task>
     <servers />
   </component>
@@ -97,25 +100,33 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="730" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1620943919382" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1620944408333">
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1621488988510">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1620944408333" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1620944347781">
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1621488988510" />
+    <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1621492968913">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620944347781" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1620944347781">
+    <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621492968913" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1621483123298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620944347781" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1620944347780">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1621483123298" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1620944651791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620944347780" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1620944347781">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620944651791" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1620944651791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620944347781" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620944651791" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1620944651791">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620944651791" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1620944651791">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620944651791" />
   </component>
 </project>
