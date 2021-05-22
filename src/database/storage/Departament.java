@@ -8,8 +8,7 @@ public class Departament {
     private String name;
     private List<Employee> employees = new ArrayList<Employee>();
 
-    public Departament (int id, String name)
-    {
+    public Departament(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -30,13 +29,5 @@ public class Departament {
     //Setters
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void addEmployee(Employee employee){
-        this.employees.add(employee);
-    }
-
-    public void delEmployee(Employee employee){
-        this.employees.remove(employee);
     }
 }

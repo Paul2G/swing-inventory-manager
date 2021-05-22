@@ -1,7 +1,6 @@
 package database.storage;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 
 public class Storage {
@@ -40,11 +39,19 @@ public class Storage {
     public void addMove(Move move)
     {
         this.moves.add(move);
+        move.getEmployee().getMoves().add(move);
+        move.getItem().getMoves().add(move);
     }
 
     public void addEmployee(Employee employee)
     {
         this.employees.add(employee);
+        try{
+            employee.getDepartament().getEmployees().add(employee);
+        } catch (Exception e) {
+            // I
+        }
+
     }
 
     public void delItem(Item item){
@@ -52,10 +59,21 @@ public class Storage {
     }
 
     public void delMove(Move move){
-        this.moves.remove(move);
+        if(move.getItem().getQty() < move.getQty()){
+            //Mensaje de error
+        } else {
+            this.moves.remove(move);
+            move.getItem().getMoves().remove(move);
+            move.getEmployee().getMoves().remove(move);
+        }
     }
 
     public void delEmployee(Employee employee){
         this.employees.remove(employee);
+        try {
+            employee.getDepartament().getEmployees().remove(employee);
+        } catch (Exception e) {
+            // E
+        }
     }
 }

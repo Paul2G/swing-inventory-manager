@@ -6,22 +6,25 @@ public class Move {
     private int id;
     private Employee employee;
     private Item item;
+    private int qty;
     private Date date;
 
     //Constuctores
-    public Move(int id, Employee employee, Item item)
+    public Move(int id, Employee employee, Item item, int qty)
     {
         this.id = id;
         this.employee = employee;
         this.item = item;
+        this.qty = qty;
         this.date = new Date();
     }
 
-    public Move(int id, Employee employee, Item item, Date date)
+    public Move(int id, Employee employee, Item item, int qty, Date date)
     {
         this.id = id;
         this.employee = employee;
         this.item = item;
+        this.qty = qty;
         this.date = date;
     }
 
@@ -38,6 +41,10 @@ public class Move {
         return item;
     }
 
+    public int getQty(){
+        return qty;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -49,6 +56,10 @@ public class Move {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public void setQty(int qty){
+        this.qty = qty;
     }
 
     public void setDate(Date date) {

@@ -9,14 +9,7 @@ public class Item {
     private int qty;
     private List<Move> moves = new ArrayList<Move>();
 
-    //Constructores
-    public Item(int id, String name, int init_qty)
-    {
-        this.id = id;
-        this.name = name;
-        this.qty = init_qty;
-    }
-
+    //Constructor
     public Item(int id, String name)
     {
         this.id = id;
@@ -48,13 +41,5 @@ public class Item {
 
     public List<Move> getMoves(){
         return moves;
-    }
-
-    public void addMove(Move move){
-        this.moves.add(move);
-    }
-
-    public void delMove(Move move){
-        this.moves.remove(move);
     }
 }

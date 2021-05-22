@@ -60,12 +60,4 @@ public class Employee {
     public void setDepartament(Departament departament) {
         this.departament = departament;
     }
-
-    public void addMove(Move move){
-        this.moves.add(move);
-    }
-
-    public void delMove(Move move){
-        this.moves.remove(move);
-    }
 }
