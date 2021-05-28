@@ -6,8 +6,8 @@ public class User extends Employee {
     private int level; //Nivel de privilegio
     private String password;
 
-    public User(int id, String lastName, String name, int level, String password) {
-        super(id, lastName, name);
+    public User(int id, String rfc, String lastName, String name, int level, String password) {
+        super(id, rfc, lastName, name);
         this.level = level;
         this.password = password;
     }

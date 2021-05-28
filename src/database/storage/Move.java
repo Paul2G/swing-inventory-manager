@@ -1,9 +1,10 @@
 package database.storage;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Move {
-    private int id;
+public class Move extends Enty implements Serializable {
     private Employee employee;
     private Item item;
     private int qty;
@@ -12,7 +13,7 @@ public class Move {
     //Constuctores
     public Move(int id, Employee employee, Item item, int qty)
     {
-        this.id = id;
+        super(id);
         this.employee = employee;
         this.item = item;
         this.qty = qty;
@@ -21,7 +22,7 @@ public class Move {
 
     public Move(int id, Employee employee, Item item, int qty, Date date)
     {
-        this.id = id;
+        super(id);
         this.employee = employee;
         this.item = item;
         this.qty = qty;
@@ -29,10 +30,6 @@ public class Move {
     }
 
     //Getters
-    public int getId() {
-        return id;
-    }
-
     public Employee getEmployee() {
         return employee;
     }
@@ -45,8 +42,10 @@ public class Move {
         return qty;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        String strDateFormat = "dd/MMMM/yyyy HH:mm:ss";
+        SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
+        return objSDF.format(date);
     }
 
     //Setters

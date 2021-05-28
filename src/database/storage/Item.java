@@ -1,45 +1,49 @@
 package database.storage;
 
+import org.w3c.dom.Entity;
+
+import javax.naming.Name;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Item {
-    private int id;
-    private String name;
+public class Item extends Enty implements Serializable {
     private int qty;
+    private int cost;
     private List<Move> moves = new ArrayList<Move>();
 
     //Constructor
-    public Item(int id, String name)
+    public Item(int id, String name, int qty, int cost)
     {
-        this.id = id;
-        this.name = name;
-        this.qty = 0;
+        super(id, name);
+        this.qty = qty;
+        this.cost = cost;
     }
 
-    //Getters
-    public int getId(){
-        return id;
-    }
-
-    public String getName(){
-        return name;
-    }
-
+    //getters
     public int getQty(){
         return qty;
     }
 
-    //Setters
-    public void setName(String name){
-        this.name = name;
+    public int getCost() {
+        return cost;
     }
 
+    //setters
     public void addQty(int qty){
         this.qty+=qty;
     }
 
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
     public List<Move> getMoves(){
         return moves;
+    }
+
+    @Override
+    public String toString() {
+        return super.getId() + " - " + super.getName();
     }
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="0104bb67-5b76-4b93-9559-876c875f5a79" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +19,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -35,7 +46,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE" value="left" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Trabajos POOA/2020-2-552-meta-6-1-paul2g-jenifferparedes Copia" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -45,16 +56,16 @@
       <recent name="D:\Paul Garcia\Documents\Mis Documentos\ESCOLARES\Programacion\^Trabajos requerimientos\LeProjet\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.InventoryGUI">
-    <configuration name="Inicio" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Inicio" />
+  <component name="RunManager" selected="Application.Start">
+    <configuration name="DatabaseGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DatabaseGUI" />
       <module name="Inventario" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InventoryGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="InventoryGUI" />
+    <configuration name="Inicio" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Inicio" />
       <module name="Inventario" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -76,9 +87,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.InventoryGUI" />
-        <item itemvalue="Application.StorageGUI" />
         <item itemvalue="Application.Start" />
+        <item itemvalue="Application.DatabaseGUI" />
+        <item itemvalue="Application.StorageGUI" />
         <item itemvalue="Application.Inicio" />
       </list>
     </recent_temporary>
@@ -97,6 +108,13 @@
       <workItem from="1621493511497" duration="12755000" />
       <workItem from="1621508792467" duration="1466000" />
       <workItem from="1621510286416" duration="198000" />
+      <workItem from="1621658544807" duration="703000" />
+      <workItem from="1621795649960" duration="35179000" />
+      <workItem from="1621890272639" duration="2560000" />
+      <workItem from="1621976908312" duration="16906000" />
+      <workItem from="1622091108879" duration="1305000" />
+      <workItem from="1622093575810" duration="6046000" />
+      <workItem from="1622159683648" duration="8283000" />
     </task>
     <servers />
   </component>
