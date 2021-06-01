@@ -4,7 +4,7 @@ import database.storage.Department;
 import database.storage.Employee;
 import database.storage.Item;
 import database.storage.Move;
-import extraPackage.OpeAndCond;
+import extraPackage.DBCheck;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -52,15 +52,9 @@ public class Database implements Serializable {
         this.items.add(item);
     }
 
-    /*
-       -1 para fracaso movmiento mayor a existencia
-        0 para fracaso movimiento mayor a deuda
-        1 para exito al añadir cuando ya habia una deuda del mismo objeto
-        2 para añadir nuevo objeto a la deuda
-    */
     public int addMove(Move move)
     {
-        int debtIndex = OpeAndCond.existThisIdIn(move.getItem().getId(), move.getEmployee().getDebt());
+        int debtIndex = DBCheck.existThisIdIn(move.getItem().getId(), move.getEmployee().getDebt());
 
         if(move.getItem().getQty() < move.getQty())
             return ERR_MOV$STOCK;
@@ -84,10 +78,7 @@ public class Database implements Serializable {
                 move.getEmployee().getMoves().add(move);
                 move.getItem().getMoves().add(move);
                 move.getItem().addQty(-move.getQty());
-                move.getEmployee().addDebt(new Item(move.getItem().getId(),
-                                                    move.getItem().getName(),
-                                                    move.getQty(),
-                                                    move.getItem().getCost()));
+                move.getEmployee().addDebt(new Item(move.getItem().getId(), move.getQty()));
 
                 return SUCCESS;
             }
@@ -112,25 +103,77 @@ public class Database implements Serializable {
     }
 
     public void delItem(Item item){
+        int itemId = item.getId();
+
+        //Borrando deuda de articulo de todos los empleados
+        for(Employee emp : this.employees){
+            for(Item item1 : emp.getDebt()){
+                if(item1.getId() == itemId){
+                    emp.getDebt().remove(item1);
+                    break;
+                }
+            }
+        }
+
+        //Editando los registros
+        for(Move move: this.moves){
+            if(move.getItem() == item)
+                move.setItem(new Item(-1, item.getName() + " [Eliminado]"));
+        }
+
+        //Eliminando articulo del inventario
         this.items.remove(item);
     }
 
     public void delMove(Move move){
-        if(move.getItem().getQty() < move.getQty()){
-            //Mensaje de error
-        } else {
-            this.moves.remove(move);
-            move.getItem().getMoves().remove(move);
-            move.getEmployee().getMoves().remove(move);
+        Item item = move.getItem();
+        Employee emp = move.getEmployee();
+
+        //Recuperando prestamo al inventario
+        item.addQty(move.getQty());
+
+        //Eliminando deuda del empleado sobre el articulo
+        for(Item item0 : emp.getDebt()){
+            if(item0.getId() == DBCheck.existThisIdIn(item.getId(), emp.getDebt())){
+                item0.addQty(-move.getQty());
+                break;
+            }
         }
+
+        //Eliminando de la lista de movmientos del empeleado
+        emp.getMoves().remove(move);
+
+        //Eliminando de la lista de movimientos del articulo
+        item.getMoves().remove(move);
+
+        //Eliminando movimiento de la base de datos
+        moves.remove(move);
     }
 
     public void delEmployee(Employee employee){
-        this.employees.remove(employee);
-        try {
-            employee.getDepartment().getEmployees().remove(employee);
-        } catch (Exception e) {
-            // E
+        Department dep = employee.getDepartment();
+
+        //Eliminando de los registros
+        for (Move move : moves){
+            if(employee == move.getEmployee())
+                move.setEmployee(new Employee(-1, employee.getName() + " [Eliminado]", employee.getLastName()));
         }
+
+        //Eliminando del departamento
+        if(dep != null)
+            dep.getEmployees().remove(employee);
+
+        //Eliminando de la base de datos
+        employees.remove(employee);
+    }
+
+    public void delDepartment(Department dep){
+        //Eliminando empleados de departamento
+        for(Employee emp : dep.getEmployees()){
+            emp.setDepartament(null);
+        }
+
+        //Eliminando de partamento de base de datos
+        departments.remove(dep);
     }
 }

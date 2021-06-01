@@ -15,7 +15,7 @@ public class InAndOut {
             oos.writeObject(database);
         }catch(IOException e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -28,7 +28,7 @@ public class InAndOut {
 
         }catch (ClassNotFoundException | IOException e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return database;
     }

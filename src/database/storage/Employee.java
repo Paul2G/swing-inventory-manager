@@ -27,6 +27,11 @@ public class Employee extends Enty implements Serializable {
         this.department = department;
     }
 
+    public Employee (int id, String name, String lastName){
+        super(id, name);
+        this.lastName = lastName;
+    }
+
     //Getters
     public String getRFC() {
         return RFC;
@@ -58,7 +63,7 @@ public class Employee extends Enty implements Serializable {
         super.setName(name);
     }
 
-    public void changeRFC(String rfc)
+    public void setRFC(String rfc)
     {
         this.RFC = rfc;
     }
@@ -73,8 +78,8 @@ public class Employee extends Enty implements Serializable {
 
     @Override
     public String toString() {
-        return super.getId() +
-                " - " +
+        return "[ID: " + super.getId() +
+                "] " +
                 getFullName();
     }
 }

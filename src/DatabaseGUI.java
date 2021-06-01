@@ -1,6 +1,8 @@
 import database.Database;
 import database.storage.*;
+import extraPackage.DBCheck;
 import extraPackage.InAndOut;
+import extraPackage.NewTableModel;
 import extraPackage.TextPrompt;
 
 import javax.swing.*;
@@ -25,9 +27,11 @@ public class DatabaseGUI extends JFrame {
     private JButton invDeleteButton;
 
     private JTable registerTable;
-    private JButton regNewButton;
+    private JButton regPresButton;
+    private JButton regDevoButton;
     private JButton regUpdateButton;
     private JButton regDeleteButton;
+    private JButton invConButton;
 
     private JTable employeesTable;
     private JTextField empSearchBar;
@@ -35,6 +39,7 @@ public class DatabaseGUI extends JFrame {
     private JButton empNewButton;
     private JButton empDeleteButton;
     private JButton empUpdateButton;
+    private JButton empConButton;
 
     private JTable departmentsTable;
     private JTextField depSearchBar;
@@ -42,6 +47,7 @@ public class DatabaseGUI extends JFrame {
     private JButton depNewButton;
     private JButton depUpdateButton;
     private JButton depDeleteButton;
+
 
     private NewTableModel invTM = new NewTableModel();
     private NewTableModel regTM = new NewTableModel();
@@ -52,7 +58,6 @@ public class DatabaseGUI extends JFrame {
         /*INICIALIZACION DE LA VENTANA Y TABLAS*/
         //Configuracion de la ventana
         setContentPane(contentPane);
-        pack();
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         //Insertando diseño
@@ -105,10 +110,18 @@ public class DatabaseGUI extends JFrame {
                 refreshInvTable();
             }
         });
-        regNewButton.addActionListener(new ActionListener() {
+        regPresButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DatabaseUpdate.onAddReg();
+                DatabaseUpdate.onAddRegPres();
+                refreshRegTable();
+                refreshInvTable();
+            }
+        });
+        regDevoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DatabaseUpdate.onAddRegDev();
                 refreshRegTable();
                 refreshInvTable();
             }
@@ -128,12 +141,280 @@ public class DatabaseGUI extends JFrame {
                 refreshDepTable();
             }
         });
+
+        invUpdateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int itemId = -1;
+
+                if(inventoryTable.getSelectedRow() != -1){
+                    itemId = (int) invTM.getValueAt(inventoryTable.getSelectedRow(), 0);
+                    DatabaseUpdate.onUpItem(itemId);
+
+                    refreshInvTable();
+                    refreshRegTable();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Debe seleccionar un articulo para editar su informacion",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+        regUpdateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int regId = -1;
+
+                try{
+                    regId = (int) regTM.getValueAt(registerTable.getSelectedRow(), 0);
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Solo se puede modificar el ultimo registro",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+
+                if(regId == DBCheck.maxId(DatabaseUpdate.database.getMoves())){
+                    DatabaseUpdate.onUpReg(regId);
+
+                    refreshRegTable();
+                    refreshInvTable();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Solo se puede modificar el ultimo registro",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+        empUpdateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int empId;
+
+                if(employeesTable.getSelectedRow() != -1){
+                    empId = (int) empTM.getValueAt(employeesTable.getSelectedRow(), 0);
+                    DatabaseUpdate.onUpEmp(empId);
+
+                    refreshEmpTable();
+                    refreshRegTable();
+                    refreshDepTable();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Debe seleccinoar un empleado para editar su informacion",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+        depUpdateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int depId;
+
+                if(departmentsTable.getSelectedRow() != -1){
+                    depId =(int) depTM.getValueAt(departmentsTable.getSelectedRow(), 0);
+                    DatabaseUpdate.onUpDep(depId);
+                    refreshDepTable();
+                    refreshEmpTable();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Debe seleccionar un departamento para editar su informacion",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+
+        invDeleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int itemId;
+
+                if(inventoryTable.getSelectedRow() != -1){
+                    itemId = (int) invTM.getValueAt(inventoryTable.getSelectedRow(), 0);
+
+                    DatabaseUpdate.onDelItem(itemId);
+
+                    refreshInvTable();
+                    refreshRegTable();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Debe seleccionar un articulo para darlo de baja",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+        regDeleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int regId = -1;
+
+                try{
+                    regId = (int) regTM.getValueAt(registerTable.getSelectedRow(), 0);
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Solo puede eliminar el ultimo registro, seleccionelo",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+
+                if(regId == DBCheck.maxId(DatabaseUpdate.database.getMoves())){
+                    DatabaseUpdate.onDelReg(regId);
+
+                    refreshRegTable();
+                    refreshInvTable();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Solo puede eliminar el ultimo registro, seleccionelo",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+        empDeleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int empId;
+
+                if(employeesTable.getSelectedRow() != -1){
+                    empId = (int) regTM.getValueAt(employeesTable.getSelectedRow(), 0);
+
+                    DatabaseUpdate.onDelEmp(empId);
+
+                    refreshEmpTable();
+                    refreshDepTable();
+                    refreshRegTable();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Debe seleccionar un empelado para darlo de baja",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+        depDeleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int depId;
+
+                if(departmentsTable.getSelectedRow() != -1){
+                    depId = (int) depTM.getValueAt(departmentsTable.getSelectedRow(), 0);
+
+                    DatabaseUpdate.onDelDep(depId);
+
+                    refreshDepTable();
+                    refreshEmpTable();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Debe seleccionar un departamento para darlo de baja",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+
+        invConButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int itemId;
+                Item item;
+
+                if(inventoryTable.getSelectedRow() != -1){
+                    itemId = (int) invTM.getValueAt(inventoryTable.getSelectedRow(), 0);
+                    item = DatabaseUpdate.database.getItems().get(DBCheck.existThisIdIn(itemId, DatabaseUpdate.database.getItems()));
+
+                    ItemConGUI dialog = new ItemConGUI(item);
+
+                    dialog.pack();
+                    dialog.setIconImage(new ImageIcon("src/resources/icon.png").getImage());
+                    dialog.setTitle("Consulta articulo: " + "[" + item.getId() + "] " + item.getName());
+                    dialog.setSize(500, 600);
+                    dialog.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Debe seleccionar un articulo para consultar sus movimientos",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+        empConButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int empId;
+                Employee emp;
+
+                if(employeesTable.getSelectedRow() != -1){
+                    empId = (int) empTM.getValueAt(employeesTable.getSelectedRow(), 0);
+                    emp = DatabaseUpdate.database.getEmployees().get(DBCheck.existThisIdIn(empId, DatabaseUpdate.database.getEmployees()));
+
+                    EmpConGUI dialog = new EmpConGUI(emp);
+
+                    dialog.pack();
+                    dialog.setIconImage(new ImageIcon("src/resources/icon.png").getImage());
+                    dialog.setTitle("Consulta empleado: " + " [" + emp.getId() + "] " + emp.getFullName());
+                    dialog.setSize(600, 700);
+                    dialog.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Debe seleccionar un empleado para consultar sus movimientos",
+                            "Seleccion invalida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+
+        invSearchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        empSearchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        depSearchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     private void refreshInvTable ()
     {
         //Item item;
-        String columnsName[] = {"Codigo", "Nombre", "Stock"};
+        String columnsName[] = {"Codigo", "Nombre", "Inventario"};
 
         //Limpiando para actualizar
         clearTable(inventoryTable);
@@ -154,8 +435,10 @@ public class DatabaseGUI extends JFrame {
     private void refreshRegTable ()
     {
         List<Move> moveList = DatabaseUpdate.database.getMoves();
-        Collections.reverse(moveList);
         String columnsName[] = {"Folio", "Fecha", "Articulo", "Empleado", "Cantidad"};
+        Object[] newRow;
+
+        Collections.reverse(moveList);
 
         //Limpiando para actualizar
         clearTable(registerTable);
@@ -168,7 +451,11 @@ public class DatabaseGUI extends JFrame {
 
         //Insertando los datos
         for(Move mov : moveList ){
-            Object[] newRow = {mov.getId(), mov.getDate(), mov.getItem().getName(), mov.getEmployee().getFullName(), mov.getQty()};
+            if(mov.getQty() < 0){
+                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getItem().getName(), mov.getEmployee().getFullName(), -mov.getQty() + " [Devolucion]"};
+            } else {
+                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getItem().getName(), mov.getEmployee().getFullName(), mov.getQty() + " [Prestamo]"};
+            }
             regTM.addRow(newRow);
         }
 
@@ -178,6 +465,7 @@ public class DatabaseGUI extends JFrame {
     public void refreshEmpTable ()
     {
         String columnsName[] = {"Id", "RFC", "Nombre", "Departamento"};
+        Object[] newRow;
 
         //Limpiando para actualizar
         clearTable(employeesTable);
@@ -190,8 +478,13 @@ public class DatabaseGUI extends JFrame {
 
         //Insertando los datos
         for(Employee emp: DatabaseUpdate.database.getEmployees()){
-            Object[] newRow = {emp.getId(), emp.getRFC(), emp.getFullName(), emp.getDepartment()};
-            empTM.addRow(newRow);
+            try{
+                newRow = new Object[]{emp.getId(), emp.getRFC(), emp.getFullName(), emp.getDepartment().getName()};
+                empTM.addRow(newRow);
+            } catch (Exception ex){
+                newRow = new Object[]{emp.getId(), emp.getRFC(), emp.getFullName(), "Sin departamento"};
+                empTM.addRow(newRow);
+            }
         }
     }
 
@@ -223,14 +516,5 @@ public class DatabaseGUI extends JFrame {
             model = (DefaultTableModel) table.getModel();
             model.removeRow(0);
         }
-    }
-}
-
-//Clase hecha para evitar celdas editables en tablas
-class NewTableModel extends DefaultTableModel
-{
-    public boolean isCellEditable (int row, int column)
-    {
-        return false;
     }
 }

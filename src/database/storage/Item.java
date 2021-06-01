@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Item extends Enty implements Serializable {
     private int qty;
+    private int totalQty;
     private int cost;
     private List<Move> moves = new ArrayList<Move>();
 
@@ -17,7 +18,18 @@ public class Item extends Enty implements Serializable {
     {
         super(id, name);
         this.qty = qty;
+        this.totalQty = qty;
         this.cost = cost;
+    }
+
+    public Item(int id, String name){
+        super(id, name);
+    }
+
+    public Item (int id, int qty){
+        super(id);
+        this.totalQty = qty;
+        this.qty = qty;
     }
 
     //getters
@@ -29,9 +41,17 @@ public class Item extends Enty implements Serializable {
         return cost;
     }
 
+    public int getTotalQty(){
+        return this.totalQty;
+    }
+
     //setters
     public void addQty(int qty){
         this.qty+=qty;
+    }
+
+    public void setTotalQty(int totalQty){
+        this.totalQty = totalQty;
     }
 
     public void setCost(int cost) {
@@ -44,6 +64,6 @@ public class Item extends Enty implements Serializable {
 
     @Override
     public String toString() {
-        return super.getId() + " - " + super.getName();
+        return "[Cod: " + super.getId() + "] " + super.getName();
     }
 }

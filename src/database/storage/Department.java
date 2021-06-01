@@ -17,8 +17,8 @@ public class Department extends Enty implements Serializable {
 
     @Override
     public String toString() {
-        return super.getId() +
-                " - " +
+        return "[Num: " + super.getId() +
+                "] " +
                 super.getName();
     }
 }
