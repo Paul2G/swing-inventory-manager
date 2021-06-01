@@ -34,7 +34,7 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Nombre"/>
+              <text value="Nombre:"/>
             </properties>
           </component>
           <component id="3a352" class="javax.swing.JLabel">
@@ -42,12 +42,12 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Codigo"/>
+              <text value="Codigo:"/>
             </properties>
           </component>
           <component id="bf898" class="javax.swing.JLabel" binding="itemIDLabel">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="ID"/>
@@ -58,7 +58,7 @@
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Costo por unidad"/>
+              <text value="Costo por unidad:"/>
             </properties>
           </component>
           <component id="1bf8" class="javax.swing.JLabel" binding="itemCostLabel">

@@ -7,7 +7,7 @@ public class Start {
         DatabaseGUI frame = new DatabaseGUI();
         frame.setIconImage(new ImageIcon("src/resources/icon.png").getImage());
         frame.setTitle("Inventario - Electronica");
-        frame.setSize(1000, 700);
+        frame.setSize(850, 550);
         frame.setVisible(true);
     }
 }

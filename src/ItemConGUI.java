@@ -101,9 +101,9 @@ public class ItemConGUI extends JDialog {
         //Insertando los datos
         for(Move mov : moveList ){
             if(mov.getQty() < 0){
-                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getEmployee().getFullName(), -mov.getQty() + " [Devolucion]"};
+                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getEmployee().getFullName(), "[Devolucion]  " + (-mov.getQty())};
             } else {
-                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getEmployee().getFullName(), mov.getQty() + " [Prestamo]"};
+                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getEmployee().getFullName(), "[Prestamo]     " + mov.getQty()};
             }
             regTM.addRow(newRow);
         }

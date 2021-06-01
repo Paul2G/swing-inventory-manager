@@ -8,12 +8,11 @@ import extraPackage.TextPrompt;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.Collections;
 import java.util.List;
+
+import static javax.swing.JOptionPane.*;
 
 
 public class DatabaseGUI extends JFrame {
@@ -21,7 +20,7 @@ public class DatabaseGUI extends JFrame {
 
     private JTable inventoryTable;
     private JTextField invSearchBar;
-    private JButton invSearchButton;
+    //private JButton invSearchButton;
     private JButton invNewButton;
     private JButton invUpdateButton;
     private JButton invDeleteButton;
@@ -35,7 +34,7 @@ public class DatabaseGUI extends JFrame {
 
     private JTable employeesTable;
     private JTextField empSearchBar;
-    private JButton empSearchButton;
+    //private JButton empSearchButton;
     private JButton empNewButton;
     private JButton empDeleteButton;
     private JButton empUpdateButton;
@@ -43,11 +42,14 @@ public class DatabaseGUI extends JFrame {
 
     private JTable departmentsTable;
     private JTextField depSearchBar;
-    private JButton depSearchButton;
+    //private JButton depSearchButton;
     private JButton depNewButton;
     private JButton depUpdateButton;
     private JButton depDeleteButton;
 
+    private JButton saveButton;
+    private JButton exitButton;
+    private JButton aboutButton;
 
     private NewTableModel invTM = new NewTableModel();
     private NewTableModel regTM = new NewTableModel();
@@ -72,10 +74,17 @@ public class DatabaseGUI extends JFrame {
         addWindowListener(new WindowAdapter()
         {
             public void windowClosing(WindowEvent e){
-                int i = JOptionPane.showConfirmDialog(null, "\u00BFSeguro que desea salir?", "Saliendo", JOptionPane.YES_NO_OPTION);
-                if(i==0) {
+                int selection = JOptionPane.showConfirmDialog(
+                        null,
+                        "\u00BFDesea guardar cambios antes de salir?",
+                        "Saliendo",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE);
+                if(selection == OK_OPTION) {
                     //Guardando cambios y saliendo
-                    InAndOut.serialize(DatabaseUpdate.database);
+                    DatabaseUpdate.saveDatabase();
+                    System.exit(0);
+                } else if (selection == NO_OPTION){
                     System.exit(0);
                 }
             }
@@ -89,7 +98,7 @@ public class DatabaseGUI extends JFrame {
         refreshDepTable();
 
         /*RELACIONADO A DISEÑO Y ACCIONES*/
-        //TextHolders para barras de busqueda
+        /*TextHolders para barras de busqueda
         TextPrompt placeHInv = new TextPrompt("Nombre del articulo...", invSearchBar);
         placeHInv.changeAlpha(0.75f);
         placeHInv.changeStyle(Font.ITALIC);
@@ -101,8 +110,81 @@ public class DatabaseGUI extends JFrame {
         TextPrompt placeHDep = new TextPrompt("Nombre de departamento...", depSearchBar);
         placeHDep.changeAlpha(0.75f);
         placeHDep.changeStyle(Font.ITALIC);
+        */
 
         //Aqui empeiza el garabato de botones jajaja
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(DatabaseUpdate.saveDatabase()){
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Se han guadado los cambios en \".../data.puga\"",
+                            "Exito al guardar cambios",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "No se han podido guardar los cambios",
+                            "Error al guadar cambios",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                }
+            }
+        });
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selection = JOptionPane.showConfirmDialog(
+                        null,
+                        "\u00BFDesea guardar cambios antes de salir?",
+                        "Saliendo",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE);
+                if(selection == OK_OPTION) {
+                    //Guardando cambios y saliendo
+                    DatabaseUpdate.saveDatabase();
+                    System.exit(0);
+                } else if (selection == NO_OPTION){
+                    System.exit(0);
+                }
+            }
+        });
+        aboutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel panel = new JPanel();
+                JLabel progras = new JLabel("Wonka Team: ");
+                JLabel team = new JLabel("Wonka Team \u00A9 2021-1");
+                JLabel uni = new JLabel("Universidad Autónoma De Baja California");
+                JLabel fac = new JLabel("Facultad de Ciencias Químicas e Ingeniería");
+                JLabel mat = new JLabel("Ingienería de requerimientos");
+
+                Font bold = new Font("Arial", Font.BOLD, 12);
+
+                progras.setFont(bold);
+                uni.setFont(bold);
+                fac.setFont(bold);
+                team.setFont(bold);
+                mat.setFont(bold);
+
+                panel.setLayout(new GridLayout (10,1));
+                panel.add(uni);
+                panel.add(fac);
+                panel.add(mat);
+                panel.add(team);
+                panel.add(new JLabel(" "));
+                panel.add(progras);
+                panel.add(new JLabel("[1262509] Areli Capistran Martínez"));
+                panel.add(new JLabel("[1261795] Cruz Betancourt Roberto"));
+                panel.add(new JLabel("[1262006] García Galeana Paul"));
+                panel.add(new JLabel("[1235197] Leonardo David Aguilar Contreras "));
+
+                JOptionPane.showMessageDialog(null, panel, "Inventario 1.0", INFORMATION_MESSAGE);
+            }
+        });
+
         invNewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -296,7 +378,7 @@ public class DatabaseGUI extends JFrame {
                 int empId;
 
                 if(employeesTable.getSelectedRow() != -1){
-                    empId = (int) regTM.getValueAt(employeesTable.getSelectedRow(), 0);
+                    empId = (int) empTM.getValueAt(employeesTable.getSelectedRow(), 0);
 
                     DatabaseUpdate.onDelEmp(empId);
 
@@ -351,7 +433,7 @@ public class DatabaseGUI extends JFrame {
                     dialog.pack();
                     dialog.setIconImage(new ImageIcon("src/resources/icon.png").getImage());
                     dialog.setTitle("Consulta articulo: " + "[" + item.getId() + "] " + item.getName());
-                    dialog.setSize(500, 600);
+                    dialog.setSize(600, 500);
                     dialog.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(
@@ -378,7 +460,7 @@ public class DatabaseGUI extends JFrame {
                     dialog.pack();
                     dialog.setIconImage(new ImageIcon("src/resources/icon.png").getImage());
                     dialog.setTitle("Consulta empleado: " + " [" + emp.getId() + "] " + emp.getFullName());
-                    dialog.setSize(600, 700);
+                    dialog.setSize(600, 650);
                     dialog.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(
@@ -391,6 +473,7 @@ public class DatabaseGUI extends JFrame {
             }
         });
 
+        /*
         invSearchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -409,6 +492,7 @@ public class DatabaseGUI extends JFrame {
 
             }
         });
+        */
     }
 
     private void refreshInvTable ()
@@ -452,9 +536,9 @@ public class DatabaseGUI extends JFrame {
         //Insertando los datos
         for(Move mov : moveList ){
             if(mov.getQty() < 0){
-                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getItem().getName(), mov.getEmployee().getFullName(), -mov.getQty() + " [Devolucion]"};
+                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getItem().getName(), mov.getEmployee().getFullName(), "[Devolucion]  " +  (-mov.getQty())};
             } else {
-                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getItem().getName(), mov.getEmployee().getFullName(), mov.getQty() + " [Prestamo]"};
+                newRow = new Object[]{mov.getId(), mov.getDate(), mov.getItem().getName(), mov.getEmployee().getFullName(), "[Prestamo]     " + mov.getQty()};
             }
             regTM.addRow(newRow);
         }

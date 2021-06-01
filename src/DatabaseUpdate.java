@@ -16,6 +16,10 @@ public class DatabaseUpdate {
             database = new Database();
     }
 
+    static boolean saveDatabase(){
+        return InAndOut.serialize(database);
+    }
+
     static void onAddItem(){
         int selection;
 
@@ -49,7 +53,7 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Favor de asignar nombre al articulo",
-                        "Articulo sin nombre",
+                        "Error al añadir nuevo articulo",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onAddItem();
@@ -57,7 +61,7 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Codigo ya existente o menor a 1 \nFavor de asignar otro codigo",
-                        "Codigo de articulo invalido",
+                        "Error al añadir nuevo articulo",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onAddItem();
@@ -65,7 +69,7 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Stock incial no puede ser menor a 1 \nFavor de reingresar stock",
-                        "Cantidad invalida",
+                        "Error al añadir nuevo articulo",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onAddItem();
@@ -73,12 +77,18 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Costo no puede ser negativo \nFavor de reingresar costo",
-                        "Costo invalido",
+                        "Error al añadir nuevo articulo",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onAddItem();
             }else  {
                 database.addItem(new Item((int)sid.getValue(), t.getText(), (int)sqty.getValue(),(int) scost.getValue()));
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El articulo ha sido añadido al inventario con exito",
+                        "Exito al añadir nuevo articulo",
+                        INFORMATION_MESSAGE
+                );
             }
         }
     }
@@ -134,15 +144,15 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Favor de llenar todos los campos",
-                        "Campo vacio",
+                        "Error al dar de alta empleado",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onAddEmp();
-            } else if(trfc.getText().length() != 18){
+            } else if(trfc.getText().length() != 13){
                 JOptionPane.showMessageDialog(
                         null,
-                        "RFC debe contener 18 catacteres",
-                        "RFC invalida",
+                        "RFC debe contener 13 catacteres",
+                        "Error al dar de alta empleado",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onAddEmp();
@@ -159,6 +169,12 @@ public class DatabaseUpdate {
                             tln.getText(),
                             tn.getText()));
                 }
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El empleado ha sido dado de alta con exito",
+                        "Exito al dar de alta empleado",
+                        INFORMATION_MESSAGE
+                );
             }
         }
     }
@@ -211,7 +227,7 @@ public class DatabaseUpdate {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "El retiro de unidades no puede exceder inventario del producto",
-                                "Registro no permitido",
+                                "Error al capturar registro",
                                 JOptionPane.WARNING_MESSAGE
                         );
                         onAddRegPres();
@@ -219,9 +235,16 @@ public class DatabaseUpdate {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "El retorno de unidades no puede exceder la deuda del empleado",
-                                "Registro no permitido",
+                                "Error al capturar registro",
                                 JOptionPane.WARNING_MESSAGE);
                         onAddRegPres();
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "El registro nuevo ha sido capturado en el historial de movimientos",
+                                "Exito al capturar registro",
+                                INFORMATION_MESSAGE
+                        );
                     }
                 }
             }
@@ -276,7 +299,7 @@ public class DatabaseUpdate {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "El retiro de unidades no puede exceder inventario del producto",
-                                "Registro no permitido",
+                                "Error al capturar registro",
                                 JOptionPane.WARNING_MESSAGE
                         );
                         onAddRegDev();
@@ -284,9 +307,16 @@ public class DatabaseUpdate {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "El retorno de unidades no puede exceder la deuda del empleado",
-                                "Registro no permitido",
+                                "Error al capturar registro",
                                 JOptionPane.WARNING_MESSAGE);
                         onAddRegDev();
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "El registro nuevo ha sido capturado en el historial de movimientos",
+                                "Exito al capturar registro",
+                                INFORMATION_MESSAGE
+                        );
                     }
                 }
             }
@@ -319,7 +349,7 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Favor de asignar nombre al departamento",
-                        "Departamento sin nombre",
+                        "Error al dar de alta departamento",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onAddDep();
@@ -327,12 +357,18 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Numero ya existente o menor a 1 \nFavor de asignar otro numero",
-                        "Numero de departamento invalido",
+                        "Error al dar de alta departamento",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onAddDep();
             }else {
                 database.addDepartment(new Department((int)s.getValue(), t.getText()));
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El departamento ha sido añadido con exito",
+                        "Exito al dar de alta departamento",
+                        INFORMATION_MESSAGE
+                );
             }
         }
     }
@@ -372,7 +408,7 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Favor de asignar nombre al articulo",
-                        "Articulo sin nombre",
+                        "Error al actualizar articulo",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onUpItem(itemId);
@@ -380,7 +416,7 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "El stock no puede ser negativo \nFavor de reingresar stock",
-                        "Cantidad invalida",
+                        "Error al actualizar articulo",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onUpItem(itemId);
@@ -388,7 +424,7 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Costo no puede ser negativo \nFavor de reingresar costo",
-                        "Costo invalido",
+                        "Error al actualizar articulo",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onUpItem(itemId);
@@ -399,6 +435,13 @@ public class DatabaseUpdate {
                 item.setCost((int) scost.getValue());
                 item.addQty(dif);
                 item.setTotalQty(item.getTotalQty() + dif);
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "La informacion del articulo ha sido actualizada con exito",
+                        "Exito al actualizar articulo",
+                        INFORMATION_MESSAGE
+                );
             }
         }
     }
@@ -462,7 +505,7 @@ public class DatabaseUpdate {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "El retiro de unidades no puede exceder inventario del producto",
-                                "Registro no permitido",
+                                "Error al actualizar registro",
                                 JOptionPane.WARNING_MESSAGE
                         );
                         database.addMove(tempMove);
@@ -471,10 +514,17 @@ public class DatabaseUpdate {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "El retorno de unidades no puede exceder la deuda del empleado",
-                                "Registro no permitido",
+                                "Error al actualizar registro",
                                 JOptionPane.WARNING_MESSAGE);
                         database.addMove(tempMove);
                         onUpReg(regId);
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Los parametros del registro han sido actualizados con exito",
+                                "Exito al actualizar registro",
+                                INFORMATION_MESSAGE
+                        );
                     }
                 }
             }
@@ -544,15 +594,15 @@ public class DatabaseUpdate {
                 JOptionPane.showMessageDialog(
                         null,
                         "Favor de llenar todos los campos",
-                        "Campo vacio",
+                        "Error al actualizar datos del empleado",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onUpEmp(empId);
-            } else if(trfc.getText().length() != 18){
+            } else if(trfc.getText().length() != 13){
                 JOptionPane.showMessageDialog(
                         null,
-                        "RFC debe contener 18 catacteres",
-                        "RFC invalida",
+                        "RFC debe contener 13 catacteres",
+                        "Error al actualizar datos de empleado",
                         JOptionPane.WARNING_MESSAGE
                 );
                 onUpEmp(empId);
@@ -569,7 +619,15 @@ public class DatabaseUpdate {
                     emp.getDepartment().getEmployees().add(emp);
                 } else {
                     emp.setDepartament(null);
+
                 }
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "La informacion del empleado ha sido actualizada con exito",
+                        "Exito al actualizar datos de empleado",
+                        INFORMATION_MESSAGE
+                );
             }
         }
     }
@@ -606,6 +664,13 @@ public class DatabaseUpdate {
                 onUpDep(depId);
             } else  {
                 dep.setName(tname.getText());
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El nombre del departamento ha sido actualizado con exito",
+                        "Exito al actualizar nombre del departamento",
+                        INFORMATION_MESSAGE
+                );
             }
         }
 
@@ -627,6 +692,12 @@ public class DatabaseUpdate {
 
         if(selection == YES_OPTION){
             database.delItem(item);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "El articulo ha sido retirado del inventario con exito",
+                    "Exito al retirar articulo",
+                    INFORMATION_MESSAGE
+            );
         }
     }
 
@@ -645,6 +716,13 @@ public class DatabaseUpdate {
 
         if(selection == YES_OPTION){
             database.delMove(move);
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "La entrada del historial ha sido eliminada con exito",
+                    "Exito al eliminar registro",
+                    INFORMATION_MESSAGE
+            );
         }
     }
 
@@ -664,6 +742,12 @@ public class DatabaseUpdate {
 
         if(selection == YES_OPTION){
             database.delEmployee(emp);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "El empleado ha sido de baja con exito",
+                    "Exito dar de baja empleado",
+                    INFORMATION_MESSAGE
+            );
         }
     }
 
@@ -683,6 +767,12 @@ public class DatabaseUpdate {
 
         if(selection == YES_OPTION){
             database.delDepartment(dep);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "El departamento ha sido dado de baja con exito",
+                    "Exito al dar de baja departamento",
+                    INFORMATION_MESSAGE
+            );
         }
     }
 }
