@@ -1,3 +1,5 @@
+/*Base de datos con extensión .puga*/
+
 import database.Database;
 import database.storage.*;
 import extraPackage.DBCheck;
@@ -97,20 +99,6 @@ public class DatabaseGUI extends JFrame {
         refreshEmpTable();
         refreshDepTable();
 
-        /*RELACIONADO A DISEÑO Y ACCIONES*/
-        /*TextHolders para barras de busqueda
-        TextPrompt placeHInv = new TextPrompt("Nombre del articulo...", invSearchBar);
-        placeHInv.changeAlpha(0.75f);
-        placeHInv.changeStyle(Font.ITALIC);
-
-        TextPrompt placeHEmp = new TextPrompt("Nombre del empelado...", empSearchBar);
-        placeHEmp.changeAlpha(0.75f);
-        placeHEmp.changeStyle(Font.ITALIC);
-
-        TextPrompt placeHDep = new TextPrompt("Nombre de departamento...", depSearchBar);
-        placeHDep.changeAlpha(0.75f);
-        placeHDep.changeStyle(Font.ITALIC);
-        */
 
         //Aqui empeiza el garabato de botones jajaja
         saveButton.addActionListener(new ActionListener() {

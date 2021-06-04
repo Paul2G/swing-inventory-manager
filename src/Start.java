@@ -1,3 +1,4 @@
+/*Principal ejecutable */
 import database.Database;
 
 import javax.swing.*;
