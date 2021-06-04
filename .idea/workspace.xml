@@ -48,8 +48,8 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
@@ -68,9 +68,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Inicio" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Inicio" />
-      <module name="Inventario" />
+    <configuration name="InventoryGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InventoryGUI" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -96,13 +95,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -110,10 +111,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Start" />
+        <item itemvalue="Application.InventoryGUI" />
         <item itemvalue="Application.ItemConGUI" />
         <item itemvalue="Application.DatabaseGUI" />
         <item itemvalue="Application.StorageGUI" />
-        <item itemvalue="Application.Inicio" />
       </list>
     </recent_temporary>
   </component>
@@ -141,7 +142,8 @@
       <workItem from="1622249804972" duration="7447000" />
       <workItem from="1622318101045" duration="20021000" />
       <workItem from="1622418640428" duration="16911000" />
-      <workItem from="1622499225459" duration="31171000" />
+      <workItem from="1622499225459" duration="31831000" />
+      <workItem from="1622772977924" duration="1841000" />
     </task>
     <servers />
   </component>

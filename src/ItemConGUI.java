@@ -43,13 +43,16 @@ public class ItemConGUI extends JDialog {
         itemTotalLabel.setText(item.getTotalQty() + "");
         itemCostLabel.setText(item.getCost() + "");
 
-        if(item.getQty() < item.getTotalQty()/3){
-            itemRiskLabel.setText("Stock muy bajo");
+        if(item.getQty() == 0){
+            itemRiskLabel.setText("Sin stock");
             itemRiskLabel.setForeground(new Color(137, 0, 0));
-        } else if (item.getQty() < 2*item.getTotalQty()/3){
+        }else if(item.getQty() < ((float) item.getTotalQty()) / 3){
+            itemRiskLabel.setText("Stock muy bajo");
+            itemRiskLabel.setForeground(new Color(170, 82, 0));
+        } else if (item.getQty() < 2 * ((float) item.getTotalQty()) / 3){
             itemRiskLabel.setText("Stock moderado");
-            itemRiskLabel.setForeground(new Color(179, 133, 1));
-        } else{
+            itemRiskLabel.setForeground(new Color(206, 160, 0));
+        } else {
             itemRiskLabel.setText("Stock alto");
             itemRiskLabel.setForeground(new Color(0, 144, 37));
         }
