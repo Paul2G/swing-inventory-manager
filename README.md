@@ -1,12 +1,12 @@
 # Inventory Management Application
 
-This is a simple inventory management application developed using Java Swing. The application allows you to manage loans to personnel, capturing inventory items, workers, and departments. All changes can be saved locally through Java object serialization.
+This is a simple inventory management application developed using Java Swing. The application allows you to manage loans to personnel, capturing inventory items, employees, and departments. All changes can be saved locally through Java object serialization.
 
 ## Features
 
 - **Inventory Management**: Capture inventory items with their name, quantity, and price.
-- **Worker Management**: Capture worker information and check their loan history, including the cost of lost items.
-- **Department Management**: Capture departments and include workers in them.
+- **Employee Management**: Capture employee information and check their loan history, including the cost of lost items.
+- **Department Management**: Capture departments and include employee in them.
 - **Data Persistence**: Save all changes locally using Java object serialization.
 
 ## Usage
